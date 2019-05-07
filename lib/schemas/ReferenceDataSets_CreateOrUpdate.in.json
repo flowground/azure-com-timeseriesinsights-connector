@@ -1,0 +1,111 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "environmentName": {
+            "required": true,
+            "type": "string"
+        },
+        "referenceDataSetName": {
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "description": "Properties required to create any resource tracked by Azure Resource Manager.",
+                    "properties": {
+                        "location": {
+                            "description": "The location of the resource.",
+                            "type": "string",
+                            "x-ms-mutability": [
+                                "read",
+                                "create"
+                            ]
+                        },
+                        "tags": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "description": "Key-value pairs of additional properties for the resource.",
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "location"
+                    ],
+                    "type": "object"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Properties used to create a reference data set.",
+                    "properties": {
+                        "dataStringComparisonBehavior": {
+                            "description": "The reference data set key comparison behavior can be set using this property. By default, the value is 'Ordinal' - which means case sensitive key comparison will be performed while joining reference data with events or while adding new reference data. When 'OrdinalIgnoreCase' is set, case insensitive comparison will be used.",
+                            "enum": [
+                                "Ordinal",
+                                "OrdinalIgnoreCase"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "DataStringComparisonBehavior"
+                            }
+                        },
+                        "keyProperties": {
+                            "description": "The list of key properties for the reference data set.",
+                            "items": {
+                                "description": "A key property for the reference data set. A reference data set can have multiple key properties.",
+                                "properties": {
+                                    "name": {
+                                        "description": "The name of the key property.",
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "description": "The type of the key property.",
+                                        "enum": [
+                                            "String",
+                                            "Double",
+                                            "Bool",
+                                            "DateTime"
+                                        ],
+                                        "type": "string",
+                                        "x-ms-enum": {
+                                            "modelAsString": true,
+                                            "name": "ReferenceDataKeyPropertyType"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "keyProperties"
+                    ]
+                }
+            },
+            "required": [
+                "properties"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

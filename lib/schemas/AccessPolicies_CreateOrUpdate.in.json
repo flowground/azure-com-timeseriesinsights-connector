@@ -1,0 +1,65 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "environmentName": {
+            "required": true,
+            "type": "string"
+        },
+        "accessPolicyName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+        },
+        "requestBody": {
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "properties": {
+                        "description": {
+                            "description": "An description of the access policy.",
+                            "type": "string"
+                        },
+                        "principalObjectId": {
+                            "description": "The objectId of the principal in Azure Active Directory.",
+                            "type": "string"
+                        },
+                        "roles": {
+                            "description": "The list of roles the principal is assigned on the environment.",
+                            "items": {
+                                "description": "A role defining the data plane operations that a principal can perform on a Time Series Insights client.",
+                                "enum": [
+                                    "Reader",
+                                    "Contributor"
+                                ],
+                                "type": "string",
+                                "x-ms-enum": {
+                                    "modelAsString": true,
+                                    "name": "AccessPolicyRole"
+                                }
+                            },
+                            "type": "array"
+                        }
+                    }
+                }
+            },
+            "required": [
+                "properties"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

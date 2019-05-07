@@ -1,0 +1,424 @@
+{
+    "title": "TimeSeriesInsightsClient",
+    "description": "Time Series Insights client",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/azure.com/timeseriesinsights/2018-08-15-preview/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://management.azure.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "azure_auth": {
+                "label": "Azure Active Directory OAuth2 Flow",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://login.microsoftonline.com/common/oauth2/authorize"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "Operations_List": {
+            "main": "./lib/actions/Operations_List.js",
+            "title": "Lists all of the available Time Series Insights related operations.",
+            "description": "Lists all of the available Time Series Insights related operations.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Operations_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Environments_ListBySubscription": {
+            "main": "./lib/actions/Environments_ListBySubscription.js",
+            "title": "Lists all the available environments within a subscription, irrespective of the resource groups.",
+            "description": "Lists all the available environments within a subscription, irrespective of the resource groups.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Environments_ListBySubscription.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Environments_ListByResourceGroup": {
+            "main": "./lib/actions/Environments_ListByResourceGroup.js",
+            "title": "Lists all the available environments associated with the subscription and within the specified resource group.",
+            "description": "Lists all the available environments associated with the subscription and within the specified resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Environments_ListByResourceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Environments_Delete": {
+            "main": "./lib/actions/Environments_Delete.js",
+            "title": "Deletes the environment with the specified name in the specified subscription and resource group.",
+            "description": "Deletes the environment with the specified name in the specified subscription and resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Environments_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Environments_Get": {
+            "main": "./lib/actions/Environments_Get.js",
+            "title": "Gets the environment with the specified name in the specified subscription and resource group.",
+            "description": "Gets the environment with the specified name in the specified subscription and resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Environments_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Environments_Update": {
+            "main": "./lib/actions/Environments_Update.js",
+            "title": "Updates the environment with the specified name in the specified subscription and resource group.",
+            "description": "Updates the environment with the specified name in the specified subscription and resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Environments_Update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Environments_CreateOrUpdate": {
+            "main": "./lib/actions/Environments_CreateOrUpdate.js",
+            "title": "Create or update an environment in the specified subscription and resource group.",
+            "description": "Create or update an environment in the specified subscription and resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Environments_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "AccessPolicies_ListByEnvironment": {
+            "main": "./lib/actions/AccessPolicies_ListByEnvironment.js",
+            "title": "Lists all the available access policies associated with the environment.",
+            "description": "Lists all the available access policies associated with the environment.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/AccessPolicies_ListByEnvironment.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "AccessPolicies_Delete": {
+            "main": "./lib/actions/AccessPolicies_Delete.js",
+            "title": "Deletes the access policy with the specified name in the specified subscription, resource group, and environment",
+            "description": "Deletes the access policy with the specified name in the specified subscription, resource group, and environment",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/AccessPolicies_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "AccessPolicies_Get": {
+            "main": "./lib/actions/AccessPolicies_Get.js",
+            "title": "Gets the access policy with the specified name in the specified environment.",
+            "description": "Gets the access policy with the specified name in the specified environment.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/AccessPolicies_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "AccessPolicies_Update": {
+            "main": "./lib/actions/AccessPolicies_Update.js",
+            "title": "Updates the access policy with the specified name in the specified subscription, resource group, and environment.",
+            "description": "Updates the access policy with the specified name in the specified subscription, resource group, and environment.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/AccessPolicies_Update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "AccessPolicies_CreateOrUpdate": {
+            "main": "./lib/actions/AccessPolicies_CreateOrUpdate.js",
+            "title": "Create or update an access policy in the specified environment.",
+            "description": "Create or update an access policy in the specified environment.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/AccessPolicies_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventSources_ListByEnvironment": {
+            "main": "./lib/actions/EventSources_ListByEnvironment.js",
+            "title": "Lists all the available event sources associated with the subscription and within the specified resource group and environment.",
+            "description": "Lists all the available event sources associated with the subscription and within the specified resource group and environment.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventSources_ListByEnvironment.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventSources_Delete": {
+            "main": "./lib/actions/EventSources_Delete.js",
+            "title": "Deletes the event source with the specified name in the specified subscription, resource group, and environment",
+            "description": "Deletes the event source with the specified name in the specified subscription, resource group, and environment",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventSources_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventSources_Get": {
+            "main": "./lib/actions/EventSources_Get.js",
+            "title": "Gets the event source with the specified name in the specified environment.",
+            "description": "Gets the event source with the specified name in the specified environment.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventSources_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventSources_Update": {
+            "main": "./lib/actions/EventSources_Update.js",
+            "title": "Updates the event source with the specified name in the specified subscription, resource group, and environment.",
+            "description": "Updates the event source with the specified name in the specified subscription, resource group, and environment.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventSources_Update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EventSources_CreateOrUpdate": {
+            "main": "./lib/actions/EventSources_CreateOrUpdate.js",
+            "title": "Create or update an event source under the specified environment.",
+            "description": "Create or update an event source under the specified environment.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EventSources_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ReferenceDataSets_ListByEnvironment": {
+            "main": "./lib/actions/ReferenceDataSets_ListByEnvironment.js",
+            "title": "Lists all the available reference data sets associated with the subscription and within the specified resource group and environment.",
+            "description": "Lists all the available reference data sets associated with the subscription and within the specified resource group and environment.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ReferenceDataSets_ListByEnvironment.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ReferenceDataSets_Delete": {
+            "main": "./lib/actions/ReferenceDataSets_Delete.js",
+            "title": "Deletes the reference data set with the specified name in the specified subscription, resource group, and environment",
+            "description": "Deletes the reference data set with the specified name in the specified subscription, resource group, and environment",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ReferenceDataSets_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ReferenceDataSets_Get": {
+            "main": "./lib/actions/ReferenceDataSets_Get.js",
+            "title": "Gets the reference data set with the specified name in the specified environment.",
+            "description": "Gets the reference data set with the specified name in the specified environment.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ReferenceDataSets_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ReferenceDataSets_Update": {
+            "main": "./lib/actions/ReferenceDataSets_Update.js",
+            "title": "Updates the reference data set with the specified name in the specified subscription, resource group, and environment.",
+            "description": "Updates the reference data set with the specified name in the specified subscription, resource group, and environment.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ReferenceDataSets_Update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ReferenceDataSets_CreateOrUpdate": {
+            "main": "./lib/actions/ReferenceDataSets_CreateOrUpdate.js",
+            "title": "Create or update a reference data set in the specified environment.",
+            "description": "Create or update a reference data set in the specified environment.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ReferenceDataSets_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

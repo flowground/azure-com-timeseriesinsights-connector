@@ -1,0 +1,78 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "environmentName": {
+            "required": true,
+            "type": "string"
+        },
+        "eventSourceName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "description": "Properties required to create any resource tracked by Azure Resource Manager.",
+                    "properties": {
+                        "location": {
+                            "description": "The location of the resource.",
+                            "type": "string",
+                            "x-ms-mutability": [
+                                "read",
+                                "create"
+                            ]
+                        },
+                        "tags": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "description": "Key-value pairs of additional properties for the resource.",
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "location"
+                    ],
+                    "type": "object"
+                }
+            ],
+            "description": "Parameters supplied to the Create or Update Event Source operation.",
+            "discriminator": {
+                "propertyName": "kind"
+            },
+            "properties": {
+                "kind": {
+                    "description": "The kind of the event source.",
+                    "enum": [
+                        "Microsoft.EventHub",
+                        "Microsoft.IoTHub"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "modelAsString": true,
+                        "name": "Kind"
+                    }
+                }
+            },
+            "required": [
+                "kind"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

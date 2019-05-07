@@ -1,0 +1,105 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "environmentName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "description": "Properties required to create any resource tracked by Azure Resource Manager.",
+                    "properties": {
+                        "location": {
+                            "description": "The location of the resource.",
+                            "type": "string",
+                            "x-ms-mutability": [
+                                "read",
+                                "create"
+                            ]
+                        },
+                        "tags": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "description": "Key-value pairs of additional properties for the resource.",
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "location"
+                    ],
+                    "type": "object"
+                }
+            ],
+            "description": "Parameters supplied to the CreateOrUpdate Environment operation.",
+            "discriminator": {
+                "propertyName": "kind"
+            },
+            "properties": {
+                "kind": {
+                    "description": "The kind of the environment.",
+                    "enum": [
+                        "Standard",
+                        "LongTerm"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "modelAsString": true,
+                        "name": "Kind"
+                    }
+                },
+                "sku": {
+                    "description": "The sku determines the type of environment, either standard (S1 or S2) or long-term (L1). For standard environments the sku determines the capacity of the environment, the ingress rate, and the billing rate.",
+                    "properties": {
+                        "capacity": {
+                            "description": "The capacity of the sku. For standard environments, this value can be changed to support scale out of environments after they have been created.",
+                            "format": "int32",
+                            "maximum": 10,
+                            "minimum": 1,
+                            "type": "integer"
+                        },
+                        "name": {
+                            "description": "The name of this SKU.",
+                            "enum": [
+                                "S1",
+                                "S2",
+                                "L1"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "SkuName"
+                            }
+                        }
+                    },
+                    "required": [
+                        "name",
+                        "capacity"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "kind",
+                "sku"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
